@@ -1,7 +1,8 @@
 import { getProducts } from "@/lib/api/products";
 
+export default async function Shop() {
+  const data = await getProducts();
 
-export default function Shop() {
   return (
     <main>
       <h1>Shop</h1>
