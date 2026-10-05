@@ -10,6 +10,9 @@ export default async function Shop() {
       {data.products.map((product: any) => (
         <div key={product.id}>
           {product.title}
+          {product.description}
+          {product.price}
+          <img src={product.image} alt={product.title} />
         </div>
       ))}
     </main>
