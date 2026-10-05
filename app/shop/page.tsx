@@ -1,10 +1,16 @@
+import { getProducts } from "@/lib/api/products";
+
+
 export default function Shop() {
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <h1 className="text-3xl font-bold">Shop</h1>
-      <p className="text-lg text-zinc-600 dark:text-zinc-400">
-        This is my shooooooooooooop!
-      </p>
-    </div>
+    <main>
+      <h1>Shop</h1>
+
+      {data.products.map((product: any) => (
+        <div key={product.id}>
+          {product.title}
+        </div>
+      ))}
+    </main>
   );
 }
