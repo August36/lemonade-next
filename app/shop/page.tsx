@@ -1,5 +1,6 @@
 import { getProducts } from "@/lib/api/products";
 import Link from "next/link";
+import AddtoCartBtn from "../components/AddtoCartBtn";
 
 export default async function Shop() {
   const data = await getProducts();
@@ -13,11 +14,11 @@ export default async function Shop() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.products.map((product: any) => (
-            <Link key={product.id} href={`/shop/${product.id}`}>
-              <div
-                key={product.id}
-                className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              >
+            <div
+              key={product.id}
+              className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <Link href={`/shop/${product.id}`}>
                 <div className="flex h-56 items-center justify-center bg-zinc-100 p-6">
                   <img
                     src={product.images[0]}
@@ -25,24 +26,25 @@ export default async function Shop() {
                     className="h-full w-full object-contain"
                   />
                 </div>
-                <div className="p-5">
-                  <h2 className="mb-2 text-lg font-semibold text-zinc-900">
+
+                <div className="p-5 pb-2">
+                  <h2 className="text-lg font-semibold text-zinc-900">
                     {product.title}
                   </h2>
-                  <p className="mb-4 line-clamp-2 text-sm text-zinc-500">
-                    {product.description}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-zinc-900">
-                      ${product.price}
-                    </span>
-                    <button className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700">
-                      Add to cart
-                    </button>
-                  </div>
+                </div>
+              </Link>
+
+              <div className="px-5 pb-5">
+
+                <div className="flex items-center justify-between">
+                  <span className="text-xl font-bold text-zinc-900">
+                    ${product.price}
+                  </span>
+
+                  <AddtoCartBtn item={product} />
+                </div>
               </div>
             </div>
-            </Link>
           ))}
         </div>
       </div>

@@ -7,7 +7,7 @@ function Nav() {
 
       <ul className="flex flex-row items-center justify-center gap-4 sm:flex-row sm:gap-8">
         <li><Link href="/shop">Shop</Link></li>
-        <li><Link href="/contact">Contact</Link></li>
+        <li><Link href="/cart">Cart</Link></li>
       </ul>
     </nav>
   );
