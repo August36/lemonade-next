@@ -2,6 +2,7 @@
 
 import RemoveFromCartBtn from "../components/RemoveFromCartBtn";
 import { useCart } from "../components/CartProvider";
+import Link from "next/link";
 
 export default function Cart() {
   const { cart, addToCart, decreaseQuantity } = useCart();
@@ -75,6 +76,12 @@ export default function Cart() {
                 <RemoveFromCartBtn id={item.id} />
               </div>
             ))}
+            <Link
+  href="/checkout"
+  className="mt-6 inline-block rounded-lg bg-black px-5 py-3 text-white hover:bg-zinc-700"
+>
+  Proceed to Checkout
+</Link>
           </div>
         )}
       </div>
