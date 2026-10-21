@@ -1,10 +1,10 @@
 "use client";
-import RemoveFromCartBtn from "../components/RemoveFromCartBtn";
 
+import RemoveFromCartBtn from "../components/RemoveFromCartBtn";
 import { useCart } from "../components/CartProvider";
 
 export default function Cart() {
-  const { cart } = useCart();
+  const { cart, addToCart, decreaseQuantity } = useCart();
 
   return (
     <main className="min-h-screen bg-zinc-50 px-6 py-12">
@@ -24,7 +24,7 @@ export default function Cart() {
             {cart.map((item: any) => (
               <div
                 key={item.id}
-                className="flex items-center gap-6 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"
+                className="flex flex-wrap items-center gap-6 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"
               >
                 <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-zinc-100 p-3">
                   <img
@@ -34,18 +34,36 @@ export default function Cart() {
                   />
                 </div>
 
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   <h2 className="text-lg font-semibold text-zinc-900">
                     {item.title}
                   </h2>
 
                   <p className="mt-1 text-sm text-zinc-500">
-                    ${item.price} each
+                    ${item.price.toFixed(2)} each
                   </p>
 
-                  <p className="mt-2 text-sm text-zinc-700">
-                    Quantity: {item.quantity}
-                  </p>
+                  <div className="mt-3 flex items-center gap-3">
+                    <button
+                      onClick={() => decreaseQuantity(item.id)}
+                      aria-label={`Decrease ${item.title} quantity`}
+                      className="flex h-8 w-8 items-center justify-center rounded-md border border-zinc-300 text-lg hover:bg-zinc-100 cursor-pointer"
+                    >
+                      −
+                    </button>
+
+                    <span className="min-w-6 text-center font-medium">
+                      {item.quantity}
+                    </span>
+
+                    <button
+                      onClick={() => addToCart(item)}
+                      aria-label={`Increase ${item.title} quantity`}
+                      className="flex h-8 w-8 items-center justify-center rounded-md border border-zinc-300 text-lg hover:bg-zinc-100 cursor-pointer"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
 
                 <div className="text-right">
@@ -53,7 +71,8 @@ export default function Cart() {
                     ${(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
-                <RemoveFromCartBtn id={item.id}/>
+
+                <RemoveFromCartBtn id={item.id} />
               </div>
             ))}
           </div>

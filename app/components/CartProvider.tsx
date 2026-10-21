@@ -38,6 +38,18 @@ export default function CartProvider({
     }
   }
 
+  function decreaseQuantity(id: number) {
+    setCart(
+      cart
+        .map((item: any) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item: any) => item.quantity > 0)
+    );
+  }
+
   function removeFromCart(id: number) {
     setCart(cart.filter((item: any) => item.id !== id));
   }
@@ -48,7 +60,8 @@ export default function CartProvider({
         cart,
         setCart,
         addToCart,
-        removeFromCart
+        decreaseQuantity,
+        removeFromCart,
       }}
     >
       {children}
