@@ -2,7 +2,11 @@ import { getProduct } from "@/lib/api/products";
 import Link from "next/link";
 import AddtoCartBtn from "@/app/components/AddtoCartBtn";
 
-export default async function Product({ params }) {
+export default async function Product({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
 
   const product = await getProduct(id);
